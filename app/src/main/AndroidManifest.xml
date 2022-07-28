@@ -4,9 +4,9 @@
     package="fr.dog.pluginarchitecturesample">
 
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
+        android:fullBackupContent="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
-        android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -14,11 +14,9 @@
         android:theme="@style/Theme.PluginArchitectureSample"
         tools:targetApi="31">
         <activity
-            android:name=".ItemDetailHostActivity"
+            android:name=".MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
-            android:resizeableActivity="true"
-            tools:targetApi="24">
+            android:resizeableActivity="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
