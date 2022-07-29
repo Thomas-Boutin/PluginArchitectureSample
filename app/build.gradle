@@ -36,6 +36,8 @@ android {
 }
 
 dependencies {
+    implementation project(":detail")
+
     implementation 'androidx.activity:activity-compose:1.5.1'
 
     def compose_version = '1.2.0'
@@ -49,6 +51,10 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
     implementation 'androidx.navigation:navigation-compose:2.5.1'
+
+    def koin_version = '3.2.0'
+    implementation "io.insert-koin:koin-android:$koin_version"
+    implementation "io.insert-koin:koin-androidx-compose:$koin_version"
 
     testImplementation 'junit:junit:4.13.2'
 

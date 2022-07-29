@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="animal_image">Animal image</string>
+    <string name="lion">Lion</string>
+</resources>
