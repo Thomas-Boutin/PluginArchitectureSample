@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun DetailScreen(
     modifier: Modifier = Modifier,
-    detailConfiguration: DetailConfiguration = DefaultDetailConfiguration
+    detailConfiguration: DetailConfiguration
 ) {
     Column(
         modifier = modifier.fillMaxSize(),
@@ -41,5 +41,5 @@ fun DetailScreen(
 @Preview
 @Composable
 fun DetailScreenPreview() {
-    DetailScreen()
+    DetailScreen(detailConfiguration = DefaultDetailConfiguration)
 }

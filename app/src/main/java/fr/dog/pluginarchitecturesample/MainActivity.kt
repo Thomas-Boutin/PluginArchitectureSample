@@ -5,8 +5,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.launch
 
@@ -30,8 +32,17 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MainScreen(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = NavigationContracts.Home.route) {
-        NavigationContracts.Home.addDestinationTo(this)
-        NavigationContracts.Detail.addDestinationTo(this)
+    val detail = NavigationContract.Detail
+    val home = NavigationContract.Home { navController.navigate(detail.route) }
+
+    NavHost(navController = navController, startDestination = home.route) {
+        addDestination(home)
+        addDestination(detail)
+    }
+}
+
+private fun NavGraphBuilder.addDestination(navigationContract: NavigationContract) {
+    composable(navigationContract.route) {
+        navigationContract.content()
     }
 }
