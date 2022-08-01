@@ -1,7 +1,6 @@
 package fr.dog.pluginarchitecturesample
 
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavGraphBuilder
 import fr.dog.detail.DefaultDetailConfiguration
 import fr.dog.detail.DetailScreen
 
