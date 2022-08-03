@@ -2,30 +2,30 @@ package fr.dog.pluginarchitecturesample
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
+    private lateinit var navController: NavHostController
+
+    private val onBackPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            navController.navigateUp()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val navHostController = rememberNavController()
-            MainScreen(navHostController)
-
-            lifecycleScope.launch {
-                navHostController
-                    .currentBackStackEntryFlow
-                    .collect { navBackStackEntry ->
-                        navBackStackEntry.destination
-                    }
-            }
+            navController = rememberNavController()
+            MainScreen(navController)
+            onBackPressedDispatcher.addCallback(onBackPressedCallback)
         }
     }
 }
@@ -33,7 +33,9 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainScreen(navController: NavHostController) {
     val detail = NavigationContract.Detail
-    val home = NavigationContract.Home { navController.navigate(detail.route) }
+    val home = NavigationContract.Home { animalType ->
+        navController.navigate(detail.asDirection(animalType))
+    }
 
     NavHost(navController = navController, startDestination = home.route) {
         addDestination(home)
@@ -41,8 +43,10 @@ fun MainScreen(navController: NavHostController) {
     }
 }
 
-private fun NavGraphBuilder.addDestination(navigationContract: NavigationContract) {
-    composable(navigationContract.route) {
-        navigationContract.content()
+private fun NavGraphBuilder.addDestination(
+    navigationContract: NavigationContract,
+) {
+    composable(route = navigationContract.route, arguments = navigationContract.arguments) {
+        navigationContract.content(it)
     }
 }
