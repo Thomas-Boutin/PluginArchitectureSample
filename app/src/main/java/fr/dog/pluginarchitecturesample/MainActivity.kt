@@ -45,8 +45,9 @@ fun MainScreen(navController: NavHostController) {
 
 private fun NavGraphBuilder.addDestination(
     navigationContract: NavigationContract,
-) {
-    composable(route = navigationContract.route, arguments = navigationContract.arguments) {
-        navigationContract.content(it)
-    }
+) = composable(
+    route = navigationContract.route,
+    arguments = navigationContract.arguments
+) { backStackEntry ->
+    navigationContract.content(backStackEntry)
 }
