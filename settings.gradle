@@ -15,3 +15,5 @@ dependencyResolutionManagement {
 rootProject.name = "PluginArchitectureSample"
 include ':app'
 include ':detail'
+include ':cat'
+include ':dog'

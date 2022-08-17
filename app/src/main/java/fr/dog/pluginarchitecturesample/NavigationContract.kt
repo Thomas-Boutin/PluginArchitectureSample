@@ -5,10 +5,9 @@ import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
-import fr.dog.detail.DefaultDetailConfiguration
 import fr.dog.detail.DetailScreen
-import fr.dog.pluginarchitecturesample.animalconfiguration.CatConfiguration
-import fr.dog.pluginarchitecturesample.animalconfiguration.DogConfiguration
+import fr.dog.pluginarchitecturesample.cat.CatConfiguration
+import fr.dog.pluginarchitecturesample.dog.DogConfiguration
 
 sealed class NavigationContract {
     abstract val route: String
