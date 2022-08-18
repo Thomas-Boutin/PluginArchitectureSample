@@ -1,7 +1,7 @@
 package fr.dog.pluginarchitecturesample.dog
 
 import androidx.compose.ui.graphics.Color
-import fr.dog.detail.DetailConfiguration
+import fr.dog.pluginarchitecturesample.detail.DetailConfiguration
 
 object DogConfiguration : DetailConfiguration {
     override val nameResource = R.string.dog

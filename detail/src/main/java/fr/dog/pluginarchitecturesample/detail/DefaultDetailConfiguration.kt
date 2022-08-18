@@ -1,4 +1,4 @@
-package fr.dog.detail
+package fr.dog.pluginarchitecturesample.detail
 
 import androidx.compose.ui.graphics.Color
 
