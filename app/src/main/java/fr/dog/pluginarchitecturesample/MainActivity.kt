@@ -10,8 +10,11 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import fr.dog.pluginarchitecturesample.cat.catModule
+import fr.dog.pluginarchitecturesample.data.Animal
+import fr.dog.pluginarchitecturesample.dog.dogModule
 import org.koin.androidx.compose.get
-import org.koin.core.qualifier.named
+import org.koin.androidx.compose.getKoin
 
 class MainActivity : ComponentActivity() {
     private lateinit var navController: NavHostController
@@ -34,7 +37,11 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MainScreen(navController: NavHostController) {
-    val detail = NavigationContract.Detail { animalType -> get(qualifier = named(animalType.name)) }
+    val detail = NavigationContract.Detail { animalType ->
+        setupDetailModuleWith(animalType)
+
+        get()
+    }
     val home = NavigationContract.Home { animalType ->
         navController.navigate(NavigationContract.Detail.asDirection(animalType))
     }
@@ -43,6 +50,16 @@ fun MainScreen(navController: NavHostController) {
         addDestination(home)
         addDestination(detail)
     }
+}
+
+@Composable
+private fun setupDetailModuleWith(animalType: Animal.AnimalType) {
+    getKoin().loadModules(modules = listOf(detailModuleFor(animalType)), allowOverride = true)
+}
+
+private fun detailModuleFor(animalType: Animal.AnimalType) = when(animalType) {
+    Animal.AnimalType.DOG -> dogModule
+    Animal.AnimalType.CAT -> catModule
 }
 
 private fun NavGraphBuilder.addDestination(
