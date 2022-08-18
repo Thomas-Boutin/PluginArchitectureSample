@@ -50,7 +50,10 @@ sealed class NavigationContract {
             private const val ANIMAL_TYPE_PARAMETER = "{$ANIMAL_TYPE}"
             const val ROUTE = "detail/$ANIMAL_TYPE_PARAMETER"
 
-            fun asDirection(animalType: Animal.AnimalType) = ROUTE.replace(ANIMAL_TYPE_PARAMETER, animalType.name)
+            fun asDirection(animalType: Animal.AnimalType) = ROUTE.replace(
+                ANIMAL_TYPE_PARAMETER,
+                animalType.name
+            )
         }
     }
 }
