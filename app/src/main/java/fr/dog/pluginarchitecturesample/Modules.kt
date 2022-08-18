@@ -1,6 +1,7 @@
 package fr.dog.pluginarchitecturesample
 
 import fr.dog.pluginarchitecturesample.cat.CatConfiguration
+import fr.dog.pluginarchitecturesample.data.Animal
 import fr.dog.pluginarchitecturesample.detail.DetailConfiguration
 import fr.dog.pluginarchitecturesample.dog.DogConfiguration
 import org.koin.core.qualifier.named

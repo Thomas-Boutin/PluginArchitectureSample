@@ -1,4 +1,4 @@
-package fr.dog.pluginarchitecturesample
+package fr.dog.pluginarchitecturesample.data
 
 @JvmInline
 value class AnimalName(val value: String)

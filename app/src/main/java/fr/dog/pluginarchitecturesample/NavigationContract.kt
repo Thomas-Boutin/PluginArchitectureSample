@@ -5,6 +5,7 @@ import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
+import fr.dog.pluginarchitecturesample.data.Animal
 import fr.dog.pluginarchitecturesample.detail.DetailConfiguration
 import fr.dog.pluginarchitecturesample.detail.DetailScreen
 
