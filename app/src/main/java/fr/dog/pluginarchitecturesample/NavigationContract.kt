@@ -5,9 +5,8 @@ import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
+import fr.dog.pluginarchitecturesample.detail.DetailConfiguration
 import fr.dog.pluginarchitecturesample.detail.DetailScreen
-import fr.dog.pluginarchitecturesample.cat.CatConfiguration
-import fr.dog.pluginarchitecturesample.dog.DogConfiguration
 
 sealed class NavigationContract {
     abstract val route: String
@@ -28,17 +27,14 @@ sealed class NavigationContract {
         }
     }
 
-    object Detail : NavigationContract() {
-        private const val ANIMAL_TYPE = "ANIMAL_TYPE"
-        private const val ANIMAL_TYPE_PARAMETER = "{$ANIMAL_TYPE}"
-
-        override val route = "detail/$ANIMAL_TYPE_PARAMETER"
+    class Detail(
+        private val detailConfigurationFrom: @Composable (Animal.AnimalType) -> DetailConfiguration
+    ) : NavigationContract() {
+        override val route = ROUTE
 
         override val arguments = listOf(
             navArgument(ANIMAL_TYPE) { type = NavType.StringType }
         )
-
-        fun asDirection(animalType: Animal.AnimalType) = route.replace(ANIMAL_TYPE_PARAMETER, animalType.name)
 
         @Composable
         override fun content(backStackEntry: NavBackStackEntry) {
@@ -46,10 +42,15 @@ sealed class NavigationContract {
             val animalType = requireNotNull(arguments.getString(ANIMAL_TYPE))
                 .let(Animal.AnimalType::valueOf)
 
-            when (animalType) {
-                Animal.AnimalType.DOG -> DetailScreen(detailConfiguration = DogConfiguration)
-                Animal.AnimalType.CAT -> DetailScreen(detailConfiguration = CatConfiguration)
-            }
+            DetailScreen(detailConfiguration = detailConfigurationFrom(animalType))
+        }
+
+        companion object {
+            private const val ANIMAL_TYPE = "ANIMAL_TYPE"
+            private const val ANIMAL_TYPE_PARAMETER = "{$ANIMAL_TYPE}"
+            const val ROUTE = "detail/$ANIMAL_TYPE_PARAMETER"
+
+            fun asDirection(animalType: Animal.AnimalType) = ROUTE.replace(ANIMAL_TYPE_PARAMETER, animalType.name)
         }
     }
 }

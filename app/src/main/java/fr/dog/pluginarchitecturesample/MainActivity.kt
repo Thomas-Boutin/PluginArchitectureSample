@@ -10,6 +10,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import org.koin.androidx.compose.get
+import org.koin.core.qualifier.named
 
 class MainActivity : ComponentActivity() {
     private lateinit var navController: NavHostController
@@ -32,9 +34,9 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MainScreen(navController: NavHostController) {
-    val detail = NavigationContract.Detail
+    val detail = NavigationContract.Detail { animalType -> get(qualifier = named(animalType.name)) }
     val home = NavigationContract.Home { animalType ->
-        navController.navigate(detail.asDirection(animalType))
+        navController.navigate(NavigationContract.Detail.asDirection(animalType))
     }
 
     NavHost(navController = navController, startDestination = home.route) {
