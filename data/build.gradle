@@ -4,11 +4,12 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 34
+    namespace "fr.dog.pluginarchitecturesample.data"
 
     defaultConfig {
         minSdk 23
-        targetSdk 32
+        targetSdk 34
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -29,20 +30,8 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-
-    buildFeatures {
-        compose true
-    }
 }
 
 dependencies {
     implementation project(":detail")
-
-    def compose_version = '1.2.1'
-    implementation "androidx.compose.ui:ui:$compose_version"
-    implementation "androidx.compose.ui:ui-tooling:$compose_version"
-    implementation "androidx.compose.foundation:foundation:$compose_version"
-    implementation "androidx.compose.material:material:$compose_version"
-    implementation "androidx.compose.material:material-icons-core:$compose_version"
-    implementation "androidx.compose.material:material-icons-extended:$compose_version"
 }
