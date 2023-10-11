@@ -38,7 +38,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainScreen(navController: NavHostController) {
     val detail = NavigationContract.Detail { animalType ->
-        setupDetailModuleWith(animalType)
+        SetupDetailModuleWith(animalType)
 
         get()
     }
@@ -53,7 +53,7 @@ fun MainScreen(navController: NavHostController) {
 }
 
 @Composable
-private fun setupDetailModuleWith(animalType: Animal.AnimalType) {
+private fun SetupDetailModuleWith(animalType: Animal.AnimalType) {
     getKoin().loadModules(modules = listOf(detailModuleFor(animalType)), allowOverride = true)
 }
 
